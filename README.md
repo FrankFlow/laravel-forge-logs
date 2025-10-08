@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/frankflow/laravel-forge-logs/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/frankflow/laravel-forge-logs/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/frankflow/laravel-forge-logs.svg?style=flat-square)](https://packagist.org/packages/frankflow/laravel-forge-logs)
 
-A Laravel package that integrates with the Laravel Forge API to fetch and manage application logs from your Forge-managed sites. Simplify log retrieval and monitoring with interactive CLI commands.
+A Laravel package that integrates with the [Laravel Forge API](https://forge.laravel.com/docs/api-reference/introduction) to fetch and manage application logs from your Forge-managed sites. Simplify log retrieval and monitoring with interactive CLI commands.
 
 ## Why this package
 With the use of AI, it is increasingly necessary to access logs remotely to speed up bug fixing.
