@@ -7,19 +7,19 @@ use Illuminate\Support\Facades\Http;
 
 class ForgeLogService
 {
-    private string $token;
+    private ?string $token;
 
-    private string $organization;
+    private ?string $organization;
 
-    private int $serverId;
+    private ?int $serverId;
 
-    private int $siteId;
+    private ?int $siteId;
 
     public function __construct(
-        string $token,
-        string $organization,
-        int $serverId,
-        int $siteId
+        ?string $token,
+        ?string $organization,
+        ?int $serverId,
+        ?int $siteId
     ) {
         $this->token = $token;
         $this->organization = $organization;
@@ -34,7 +34,7 @@ class ForgeLogService
     {
         return new self(
             config('forge-logs.forge_token'),
-            config('forge-logs.forge_org'),
+            config('forge-logs.forge_organization'),
             config('forge-logs.forge_server_id'),
             config('forge-logs.forge_site_id')
         );
@@ -47,7 +47,7 @@ class ForgeLogService
     {
         $url = $this->buildLogUrl($logType);
 
-        return Http::withToken($this->token)
+        return Http::withToken($this->token ?? '')
             ->acceptJson()
             ->get($url);
     }
@@ -128,9 +128,9 @@ class ForgeLogService
     {
         return sprintf(
             'https://forge.laravel.com/api/orgs/%s/servers/%d/sites/%d/logs/%s',
-            $this->organization,
-            $this->serverId,
-            $this->siteId,
+            $this->organization ?? '',
+            $this->serverId ?? 0,
+            $this->siteId ?? 0,
             $logType
         );
     }
@@ -143,19 +143,19 @@ class ForgeLogService
         $errors = [];
 
         if (empty($this->token)) {
-            $errors[] = 'FORGE_TOKEN not configured';
-        }
-
-        if (empty($this->serverId)) {
-            $errors[] = 'FORGE_SERVER_ID not configured';
-        }
-
-        if (empty($this->siteId)) {
-            $errors[] = 'FORGE_SITE_ID not configured';
+            $errors[] = 'FORGE_TOKEN not configured. Add your Forge API token to .env file.';
         }
 
         if (empty($this->organization)) {
-            $errors[] = 'FORGE_ORGANIZATION not configured';
+            $errors[] = 'FORGE_ORGANIZATION not configured. Run "php artisan forge-init" to configure.';
+        }
+
+        if (empty($this->serverId)) {
+            $errors[] = 'FORGE_SERVER_ID not configured. Run "php artisan forge-init" to configure.';
+        }
+
+        if (empty($this->siteId)) {
+            $errors[] = 'FORGE_SITE_ID not configured. Run "php artisan forge-init" to configure.';
         }
 
         return $errors;

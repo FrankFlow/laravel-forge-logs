@@ -27,7 +27,7 @@ class ForgeApiService
     /**
      * List all organizations
      *
-     * @return array{success: bool, data?: array, error?: string}
+     * @return array{success: bool, data?: array, error?: string, status?: int, body?: string}
      */
     public function listOrganizations(): array
     {
@@ -62,7 +62,7 @@ class ForgeApiService
     /**
      * List servers for an organization
      *
-     * @return array{success: bool, data?: array, error?: string}
+     * @return array{success: bool, data?: array, error?: string, status?: int, body?: string}
      */
     public function listServersForOrganization(string $orgSlug): array
     {
@@ -97,7 +97,7 @@ class ForgeApiService
     /**
      * List sites for a specific server
      *
-     * @return array{success: bool, data?: array, error?: string}
+     * @return array{success: bool, data?: array, error?: string, status?: int, body?: string}
      */
     public function listSitesForServer(string $orgSlug, int $serverId): array
     {
@@ -132,7 +132,7 @@ class ForgeApiService
     /**
      * Get site details
      *
-     * @return array{success: bool, data?: array, error?: string}
+     * @return array{success: bool, data?: array, error?: string, status?: int, body?: string}
      */
     public function getSite(string $orgSlug, int $serverId, int $siteId): array
     {
