@@ -29,10 +29,27 @@ You can install the package via Composer:
 ```bash
 composer require frankflow/laravel-forge-logs
 ```
+ 
+## Get Your Laravel Forge API Token
+
+First, obtain your API token from Laravel Forge:
+
+1. Log in to [Laravel Forge](https://forge.laravel.com)
+2. Go to your account settings
+3. Navigate to the API section
+4. Generate a new API token
+
+## Add Your Forge Token to .env
+
+Add the following line to your `.env` file:
+
+```env
+FORGE_TOKEN=your-forge-api-token-here
+```
 
 The package will automatically register its service provider.
 
-### Publishing Configuration
+## Publishing Configuration
 
 Publish the configuration file:
 
@@ -52,39 +69,15 @@ return [
 ``` 
  
 
-## Configuration
 
-### 1. Get Your Laravel Forge API Token
 
-First, obtain your API token from Laravel Forge:
-
-1. Log in to [Laravel Forge](https://forge.laravel.com)
-2. Go to your account settings
-3. Navigate to the API section
-4. Generate a new API token
-
-### 2. Add Your Forge Token to .env
-
-Add the following line to your `.env` file:
-
-```env
-FORGE_TOKEN=your-forge-api-token-here
-```
-
-### 3. Run the Interactive Setup
+## Run the Interactive Setup
 
 Run the initialization command to configure your organization, server, and site:
 
 ```bash
 php artisan forge-init
 ```
-
-
-
-
-
- 
-
 
 
 
@@ -100,9 +93,8 @@ This interactive command will:
 
 4. Automatically update your `.env` file with the configuration
 
-## Usage
 
-### Fetching Logs
+## USAGE: Fetching Logs
 
 Once configured, fetch your application logs with:
 
@@ -111,25 +103,7 @@ php artisan forge-fetch-log
 ```
 
 The logs will be saved to `storage/logs/laravel.log` by default.
-
-## Example Workflow
-
-```bash
-# Install the package
-composer require frankflow/laravel-forge-logs
-
-# Publish the config (optional)
-php artisan vendor:publish --tag="forge-logs-config"
-
-# Add your Forge token to .env
-echo "FORGE_TOKEN=your-token-here" >> .env
-
-# Run interactive setup
-php artisan forge-init
-
-# Fetch logs
-php artisan forge-fetch-log
-```
+ 
 
 ## Testing
 
