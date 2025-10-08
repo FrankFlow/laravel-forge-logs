@@ -4,7 +4,7 @@ namespace FrankFlow\LaravelForgeLogs;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeLogsCommand;
+use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeInitCommand;
 use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeFetchLogCommand;
 
 class LaravelForgeLogsServiceProvider extends PackageServiceProvider
@@ -22,7 +22,7 @@ class LaravelForgeLogsServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_laravel_forge_logs_table')
             ->hasCommands([
-                LaravelForgeLogsCommand::class,
+                LaravelForgeInitCommand::class,
                 LaravelForgeFetchLogCommand::class,
             ]);
     }

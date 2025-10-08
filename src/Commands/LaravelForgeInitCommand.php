@@ -12,7 +12,7 @@ use function Laravel\Prompts\info;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\spin;
 
-class LaravelForgeLogsCommand extends Command
+class LaravelForgeInitCommand extends Command
 {
     public $signature = 'forge-init';
 
