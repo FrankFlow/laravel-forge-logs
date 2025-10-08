@@ -71,7 +71,11 @@ FORGE_TOKEN=your-forge-api-token-here
 ### 3. Run the Interactive Setup
 
 Run the initialization command to configure your organization, server, and site:
-![Foto](./assets/images/1.jpg)
+
+![Forge Init Step 1](./assets/1.jpg)
+![Forge Init Step 2](./assets/2.jpg)
+![Forge Init Step 3](./assets/3.jpg)
+ 
 
 
 
