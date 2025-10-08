@@ -47,29 +47,6 @@ Add the following line to your `.env` file:
 FORGE_TOKEN=your-forge-api-token-here
 ```
 
-The package will automatically register its service provider.
-
-## Publishing Configuration
-
-Publish the configuration file:
-
-```bash
-php artisan vendor:publish --tag="forge-logs-config"
-```
-
-This will create a `config/forge-logs.php` file with the following structure:
-
-```php
-return [
-    'forge_token' => env('FORGE_TOKEN'),
-    'forge_server_id' => env('FORGE_SERVER_ID'),
-    'forge_site_id' => env('FORGE_SITE_ID'),
-    'forge_org' => env('FORGE_ORG'),
-];
-``` 
- 
-
-
 
 ## Run the Interactive Setup
 
@@ -103,7 +80,28 @@ php artisan forge-fetch-log
 ```
 
 The logs will be saved to `storage/logs/laravel.log` by default.
- 
+
+
+
+
+## [Optional] Publishing Configuration
+
+Publish the configuration file:
+
+```bash
+php artisan vendor:publish --tag="forge-logs-config"
+```
+
+This will create a `config/forge-logs.php` file with the following structure:
+
+```php
+return [
+    'forge_token' => env('FORGE_TOKEN'),
+    'forge_server_id' => env('FORGE_SERVER_ID'),
+    'forge_site_id' => env('FORGE_SITE_ID'),
+    'forge_org' => env('FORGE_ORG'),
+];
+``` 
 
 ## Testing
 
