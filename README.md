@@ -46,16 +46,8 @@ return [
     'forge_site_id' => env('FORGE_SITE_ID'),
     'forge_org' => env('FORGE_ORG'),
 ];
-```
-
-### Publishing Migrations
-
-If you need to customize the migrations, publish them with:
-
-```bash
-php artisan vendor:publish --tag="forge-logs-migrations"
-php artisan migrate
-```
+``` 
+ 
 
 ## Configuration
 
@@ -79,6 +71,9 @@ FORGE_TOKEN=your-forge-api-token-here
 ### 3. Run the Interactive Setup
 
 Run the initialization command to configure your organization, server, and site:
+![Foto](./assets/images/1.jpg)
+
+
 
 ```bash
 php artisan forge-init
@@ -100,12 +95,6 @@ Once configured, fetch your application logs with:
 
 ```bash
 php artisan forge-fetch-log
-```
-
-By default, this fetches application logs. You can specify a different log type:
-
-```bash
-php artisan forge-fetch-log --type=application
 ```
 
 The logs will be saved to `storage/logs/laravel.log` by default.
