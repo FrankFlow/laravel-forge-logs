@@ -2,8 +2,8 @@
 
 namespace FrankFlow\LaravelForgeLogs\Commands;
 
-use Illuminate\Console\Command;
 use FrankFlow\LaravelForgeLogs\Services\ForgeLogService;
+use Illuminate\Console\Command;
 
 class LaravelForgeFetchLogCommand extends Command
 {
@@ -17,10 +17,11 @@ class LaravelForgeFetchLogCommand extends Command
 
         // Validate configuration
         $errors = $service->validateConfig();
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             foreach ($errors as $error) {
                 $this->error($error);
             }
+
             return self::FAILURE;
         }
 
@@ -31,7 +32,7 @@ class LaravelForgeFetchLogCommand extends Command
 
         $result = $service->fetchAndSave($logPath, $logType);
 
-        if (!$result['success']) {
+        if (! $result['success']) {
             $this->error($result['error']);
 
             if (isset($result['status'])) {
@@ -46,7 +47,7 @@ class LaravelForgeFetchLogCommand extends Command
         }
 
         $this->info("Logs fetched successfully and saved to: {$result['path']}");
-        $this->line("Size: " . number_format($result['size']) . " bytes");
+        $this->line('Size: '.number_format($result['size']).' bytes');
 
         return self::SUCCESS;
     }

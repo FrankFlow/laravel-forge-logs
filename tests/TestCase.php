@@ -2,9 +2,9 @@
 
 namespace FrankFlow\LaravelForgeLogs\Tests;
 
+use FrankFlow\LaravelForgeLogs\LaravelForgeLogsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use FrankFlow\LaravelForgeLogs\LaravelForgeLogsServiceProvider;
 
 class TestCase extends Orchestra
 {

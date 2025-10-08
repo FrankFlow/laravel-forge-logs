@@ -4,10 +4,8 @@ namespace FrankFlow\LaravelForgeLogs\Services;
 
 class WriteEnvFile
 {
-
     public static function writeEnv(string $organization, int $serverId, int $siteId, string $envPath)
     {
-
 
         // Leggi il contenuto attuale
         $envContent = file_get_contents($envPath);

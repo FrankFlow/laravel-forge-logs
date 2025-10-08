@@ -2,12 +2,13 @@
 
 namespace FrankFlow\LaravelForgeLogs\Services;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 
 class ForgeApiService
 {
     private string $token;
+
     private string $baseUrl = 'https://forge.laravel.com/api';
 
     public function __construct(string $token)
@@ -82,7 +83,7 @@ class ForgeApiService
         $servers = collect($data['data'] ?? [])
             ->map(fn ($server) => [
                 'id' => $server['id'],
-                'name' => $server['attributes']['name'] ?? 'Server #' . $server['id'],
+                'name' => $server['attributes']['name'] ?? 'Server #'.$server['id'],
                 'ip_address' => $server['attributes']['ip_address'] ?? null,
             ])
             ->toArray();
@@ -160,7 +161,7 @@ class ForgeApiService
     {
         return Http::withToken($this->token)
             ->acceptJson()
-            ->send($method, $this->baseUrl . $endpoint);
+            ->send($method, $this->baseUrl.$endpoint);
     }
 
     /**
@@ -168,6 +169,6 @@ class ForgeApiService
      */
     public function hasToken(): bool
     {
-        return !empty($this->token);
+        return ! empty($this->token);
     }
 }

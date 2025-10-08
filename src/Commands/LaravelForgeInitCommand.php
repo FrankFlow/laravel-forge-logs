@@ -5,11 +5,11 @@ namespace FrankFlow\LaravelForgeLogs\Commands;
 use FrankFlow\LaravelForgeLogs\Services\ForgeApiService;
 use FrankFlow\LaravelForgeLogs\Services\WriteEnvFile;
 use Illuminate\Console\Command;
-use function Laravel\Prompts\text;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\search;
-use function Laravel\Prompts\info;
+
 use function Laravel\Prompts\error;
+use function Laravel\Prompts\info;
+use function Laravel\Prompts\search;
+use function Laravel\Prompts\select;
 use function Laravel\Prompts\spin;
 
 class LaravelForgeInitCommand extends Command
@@ -22,8 +22,9 @@ class LaravelForgeInitCommand extends Command
     {
         $envPath = base_path('.env');
 
-        if (!file_exists($envPath)) {
+        if (! file_exists($envPath)) {
             error('.env file not found!');
+
             return self::FAILURE;
         }
 
@@ -32,6 +33,7 @@ class LaravelForgeInitCommand extends Command
 
         if (empty($token)) {
             error('FORGE_TOKEN not found in .env file. Please add it manually.');
+
             return self::FAILURE;
         }
 
@@ -43,7 +45,7 @@ class LaravelForgeInitCommand extends Command
             'Fetching organizations...'
         );
 
-        if (!$orgsResult['success']) {
+        if (! $orgsResult['success']) {
             error($orgsResult['error'] ?? 'Failed to fetch organizations');
             if (isset($orgsResult['status'])) {
                 $this->error("HTTP Status: {$orgsResult['status']}");
@@ -51,11 +53,13 @@ class LaravelForgeInitCommand extends Command
             if (isset($orgsResult['body'])) {
                 $this->error("Response: {$orgsResult['body']}");
             }
+
             return self::FAILURE;
         }
 
         if (empty($orgsResult['data'])) {
             error('No organizations found');
+
             return self::FAILURE;
         }
 
@@ -76,7 +80,7 @@ class LaravelForgeInitCommand extends Command
             'Fetching servers...'
         );
 
-        if (!$serversResult['success']) {
+        if (! $serversResult['success']) {
             error($serversResult['error'] ?? 'Failed to fetch servers');
             if (isset($serversResult['status'])) {
                 $this->error("HTTP Status: {$serversResult['status']}");
@@ -84,18 +88,20 @@ class LaravelForgeInitCommand extends Command
             if (isset($serversResult['body'])) {
                 $this->error("Response: {$serversResult['body']}");
             }
+
             return self::FAILURE;
         }
 
         if (empty($serversResult['data'])) {
             error('No servers found for this organization');
+
             return self::FAILURE;
         }
 
         // Prepare servers for selection
         $serverChoices = collect($serversResult['data'])
             ->mapWithKeys(fn ($server) => [
-                $server['id'] => "{$server['name']} ({$server['ip_address']})"
+                $server['id'] => "{$server['name']} ({$server['ip_address']})",
             ])
             ->toArray();
 
@@ -111,7 +117,7 @@ class LaravelForgeInitCommand extends Command
             'Fetching sites...'
         );
 
-        if (!$sitesResult['success']) {
+        if (! $sitesResult['success']) {
             error($sitesResult['error'] ?? 'Failed to fetch sites');
             if (isset($sitesResult['status'])) {
                 $this->error("HTTP Status: {$sitesResult['status']}");
@@ -119,11 +125,13 @@ class LaravelForgeInitCommand extends Command
             if (isset($sitesResult['body'])) {
                 $this->error("Response: {$sitesResult['body']}");
             }
+
             return self::FAILURE;
         }
 
         if (empty($sitesResult['data'])) {
             error('No sites found for this server');
+
             return self::FAILURE;
         }
 
@@ -135,17 +143,16 @@ class LaravelForgeInitCommand extends Command
             placeholder: 'Type to search...',
             options: fn (string $value) => strlen($value) > 0
                 ? collect($sites)
-                    ->filter(fn ($site) =>
-                        stripos($site['name'], $value) !== false ||
+                    ->filter(fn ($site) => stripos($site['name'], $value) !== false ||
                         stripos($site['url'] ?? '', $value) !== false
                     )
                     ->mapWithKeys(fn ($site) => [
-                        $site['id'] => "{$site['name']} ({$site['url']})"
+                        $site['id'] => "{$site['name']} ({$site['url']})",
                     ])
                     ->toArray()
                 : collect($sites)
                     ->mapWithKeys(fn ($site) => [
-                        $site['id'] => "{$site['name']} ({$site['url']})"
+                        $site['id'] => "{$site['name']} ({$site['url']})",
                     ])
                     ->toArray()
         );

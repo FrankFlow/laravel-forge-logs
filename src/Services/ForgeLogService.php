@@ -2,14 +2,17 @@
 
 namespace FrankFlow\LaravelForgeLogs\Services;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 
 class ForgeLogService
 {
     private string $token;
+
     private string $organization;
+
     private int $serverId;
+
     private int $siteId;
 
     public function __construct(
@@ -70,7 +73,7 @@ class ForgeLogService
     {
         $directory = dirname($filePath);
 
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
 
@@ -104,7 +107,7 @@ class ForgeLogService
 
         $saved = $this->saveToFile($content, $filePath);
 
-        if (!$saved) {
+        if (! $saved) {
             return [
                 'success' => false,
                 'error' => 'Failed to write logs to file',
