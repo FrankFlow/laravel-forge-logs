@@ -7,6 +7,9 @@
 
 A Laravel package that integrates with the Laravel Forge API to fetch and manage application logs from your Forge-managed sites. Simplify log retrieval and monitoring with interactive CLI commands.
 
+## Why this package
+With the use of AI, it is increasingly necessary to access logs remotely to speed up bug fixing.
+
 ## Features
 
 - Interactive setup wizard to configure your Forge organization, server, and site
