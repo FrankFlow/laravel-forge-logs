@@ -2,7 +2,7 @@
 
 namespace FrankFlow\LaravelForgeLogs\Services;
 
-class WriteEnvFile
+class WriteEnvFileService
 {
     public static function writeEnv(string $organization, int $serverId, int $siteId, string $envPath)
     {

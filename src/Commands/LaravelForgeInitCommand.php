@@ -3,7 +3,7 @@
 namespace FrankFlow\LaravelForgeLogs\Commands;
 
 use FrankFlow\LaravelForgeLogs\Services\ForgeApiService;
-use FrankFlow\LaravelForgeLogs\Services\WriteEnvFile;
+use FrankFlow\LaravelForgeLogs\Services\WriteEnvFileService;
 use Illuminate\Console\Command;
 
 use function Laravel\Prompts\error;
@@ -158,7 +158,7 @@ class LaravelForgeInitCommand extends Command
         );
 
         // Write to .env file
-        WriteEnvFile::writeEnv($selectedOrgSlug, (int) $serverId, (int) $siteId, $envPath);
+        WriteEnvFileService::writeEnv($selectedOrgSlug, (int) $serverId, (int) $siteId, $envPath);
 
         info('✓ Configuration saved to .env file!');
         $this->components->info("Organization: {$selectedOrgSlug}");
