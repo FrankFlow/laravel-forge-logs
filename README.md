@@ -72,24 +72,30 @@ FORGE_TOKEN=your-forge-api-token-here
 
 Run the initialization command to configure your organization, server, and site:
 
-![Forge Init Step 1](./assets/1.jpg)
-![Forge Init Step 2](./assets/2.jpg)
-![Forge Init Step 3](./assets/3.jpg)
- 
-
-
-
 ```bash
 php artisan forge-init
 ```
 
+
+
+
+
+ 
+
+
+
+
 This interactive command will:
 1. Fetch and display your available Forge organizations
-2. Let you select your organization
-3. Fetch and display servers for the selected organization
-4. Let you select your server
-5. Allow you to search and select your site
-6. Automatically update your `.env` file with the configuration
+   ![Forge Init Step 1](./assets/1.jpg)
+
+2. Fetch and display servers for the selected organization
+   ![Forge Init Step 2](./assets/2.jpg)
+
+3. Allow you to search and select your site
+   ![Forge Init Step 3](./assets/3.jpg)
+
+4. Automatically update your `.env` file with the configuration
 
 ## Usage
 
