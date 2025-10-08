@@ -2,13 +2,10 @@
 
 namespace FrankFlow\LaravelForgeLogs;
 
- 
-
+use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeFetchLogCommand;
+use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeInitCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-
-use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeInitCommand;
-use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeFetchLogCommand;
 
 class LaravelForgeLogsServiceProvider extends PackageServiceProvider
 {
