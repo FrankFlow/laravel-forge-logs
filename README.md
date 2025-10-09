@@ -37,8 +37,8 @@ First, obtain your API token from Laravel Forge:
 
 1. Log in to [Laravel Forge](https://forge.laravel.com)
 2. Go to your account settings
-3. Navigate to the API section
-4. Generate a new API token
+3. Navigate to the API section 
+4. Generate a new API token (make sure you set the right scopes for the token)
 
 ## Add Your Forge Token to .env
 
