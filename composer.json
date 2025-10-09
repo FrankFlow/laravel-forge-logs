@@ -1,5 +1,6 @@
 {
     "name": "frankflow/laravel-forge-logs",
+    "version": "1.0.0",
     "description": "A Laravel Forge API wrapper for logs",
     "keywords": [
         "FrankFlow",
@@ -68,8 +69,15 @@
             "aliases": {
                 "LaravelForgeLogs": "FrankFlow\\LaravelForgeLogs\\Facades\\LaravelForgeLogs"
             }
+        },
+        "branch-alias": {
+            "dev-main": "1.x-dev"
         }
     },
-    "minimum-stability": "dev",
+    "type": "library",
+    "suggest": {
+        "Install as dev dependency": "composer require --dev frankflow/laravel-forge-logs"
+    },
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

@@ -28,7 +28,7 @@ With the use of AI, it is increasingly necessary to access logs remotely to spee
 You can install the package via Composer:
 
 ```bash
-composer require frankflow/laravel-forge-logs
+composer require frankflow/laravel-forge-logs --dev
 ```
  
 ## Get Your Laravel Forge API Token
