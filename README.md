@@ -1,4 +1,8 @@
+![Cover](./assets/cover.jpg)
+
+
 # Laravel Forge Logs
+
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/frankflow/laravel-forge-logs.svg?style=flat-square)](https://packagist.org/packages/frankflow/laravel-forge-logs)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/frankflow/laravel-forge-logs/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/frankflow/laravel-forge-logs/actions?query=workflow%3Arun-tests+branch%3Amain)
