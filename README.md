@@ -20,8 +20,7 @@ With the use of AI, it is increasingly necessary to access logs remotely to spee
 - Fetch application logs directly from Laravel Forge
 - Fetch nginx access logs from Laravel Forge
 - Store logs locally for analysis
-- Simple artisan commands for easy integration
-- [Coming Soon] access to nginx error logs
+- Simple artisan commands for easy integration 
 
 ## Requirements
 
