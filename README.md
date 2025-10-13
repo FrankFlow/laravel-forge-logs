@@ -18,9 +18,10 @@ With the use of AI, it is increasingly necessary to access logs remotely to spee
 
 - Interactive setup wizard to configure your Forge organization, server, and site
 - Fetch application logs directly from Laravel Forge
+- Fetch nginx access logs from Laravel Forge
 - Store logs locally for analysis
 - Simple artisan commands for easy integration
-- [Coming Soon] access to nginx file error
+- [Coming Soon] access to nginx error logs
 
 ## Requirements
 
@@ -78,13 +79,33 @@ This interactive command will:
 
 ## USAGE: Fetching Logs
 
-Once configured, fetch your application logs with:
+Once configured, you can fetch different types of logs:
+
+### Fetch All Logs (Recommended)
 
 ```bash
-php artisan forge-fetch-log
+php artisan forge-fetch-logs
+# or
+php artisan forge-all-logs
+```
+
+This command will fetch both Laravel application logs and Nginx access logs in sequence.
+
+### Fetch Application Logs Only
+
+```bash
+php artisan forge-laravel-logs
 ```
 
 The logs will be saved to `storage/logs/laravel.log` by default.
+
+### Fetch Nginx Access Logs Only
+
+```bash
+php artisan forge-nginx-logs
+```
+
+The logs will be saved to `storage/logs/nginx/access.log` by default.
 
 
 

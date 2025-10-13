@@ -5,11 +5,11 @@ namespace FrankFlow\LaravelForgeLogs\Commands;
 use FrankFlow\LaravelForgeLogs\Services\ForgeLogService;
 use Illuminate\Console\Command;
 
-class LaravelForgeFetchLogCommand extends Command
+class LaravelForgeFetchNginxAccessLogCommand extends Command
 {
-    public $signature = 'forge-laravel-logs';
+    public $signature = 'forge-nginx-logs';
 
-    public $description = 'Fetch application logs from Laravel Forge';
+    public $description = 'Fetch nginx access logs from Laravel Forge';
 
     public function handle(): int
     {
@@ -25,11 +25,11 @@ class LaravelForgeFetchLogCommand extends Command
             return self::FAILURE;
         }
 
-        $this->info('Fetching logs from Laravel Forge...');
+        $this->info('Fetching nginx access logs from Laravel Forge...');
 
-        $logPath = storage_path('logs/laravel.log');
+        $logPath = storage_path('logs/nginx/access.log');
 
-        $result = $service->fetchAndSave($logPath);
+        $result = $service->fetchAndSaveNginxAccessLogs($logPath);
 
         if (! $result['success']) {
             $this->error($result['error']);
@@ -45,7 +45,7 @@ class LaravelForgeFetchLogCommand extends Command
             return self::FAILURE;
         }
 
-        $this->info("Logs fetched successfully and saved to: {$result['path']}");
+        $this->info("Nginx access logs fetched successfully and saved to: {$result['path']}");
         $this->line('Size: '.number_format($result['size']).' bytes');
 
         return self::SUCCESS;

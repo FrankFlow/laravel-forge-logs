@@ -2,7 +2,10 @@
 
 namespace FrankFlow\LaravelForgeLogs;
 
+use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeAllLogsCommand;
+use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeFetchAllLogsCommand;
 use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeFetchLogCommand;
+use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeFetchNginxAccessLogCommand;
 use FrankFlow\LaravelForgeLogs\Commands\LaravelForgeInitCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -24,6 +27,9 @@ class LaravelForgeLogsServiceProvider extends PackageServiceProvider
             ->hasCommands([
                 LaravelForgeInitCommand::class,
                 LaravelForgeFetchLogCommand::class,
+                LaravelForgeFetchNginxAccessLogCommand::class,
+                LaravelForgeFetchAllLogsCommand::class,
+                LaravelForgeAllLogsCommand::class,
             ]);
     }
 }
