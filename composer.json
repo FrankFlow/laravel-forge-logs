@@ -1,6 +1,5 @@
 {
     "name": "frankflow/laravel-forge-logs",
-    "version": "1.0.0",
     "description": "A Laravel Forge API wrapper for logs",
     "keywords": [
         "FrankFlow",
