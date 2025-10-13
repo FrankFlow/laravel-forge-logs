@@ -9,7 +9,7 @@ class LaravelForgeFetchAllLogsCommand extends Command
 {
     public $signature = 'forge-fetch-logs';
 
-    public $description = 'Fetch all logs (Laravel + Nginx access) from Laravel Forge';
+    public $description = 'Fetch all logs (Laravel + Nginx access + Nginx error) from Laravel Forge';
 
     public function handle(): int
     {
@@ -29,18 +29,24 @@ class LaravelForgeFetchAllLogsCommand extends Command
         $this->newLine();
 
         // Fetch Laravel logs
-        $this->line('1/2 Fetching Laravel application logs...');
+        $this->line('1/3 Fetching Laravel application logs...');
         $laravelResult = $this->call('forge-laravel-logs');
 
         $this->newLine();
 
         // Fetch Nginx access logs
-        $this->line('2/2 Fetching Nginx access logs...');
-        $nginxResult = $this->call('forge-nginx-logs');
+        $this->line('2/3 Fetching Nginx access logs...');
+        $nginxAccessResult = $this->call('forge-nginx-access-logs');
 
         $this->newLine();
 
-        if ($laravelResult === self::SUCCESS && $nginxResult === self::SUCCESS) {
+        // Fetch Nginx error logs
+        $this->line('3/3 Fetching Nginx error logs...');
+        $nginxErrorResult = $this->call('forge-nginx-error-logs');
+
+        $this->newLine();
+
+        if ($laravelResult === self::SUCCESS && $nginxAccessResult === self::SUCCESS && $nginxErrorResult === self::SUCCESS) {
             $this->info('All logs fetched successfully!');
 
             return self::SUCCESS;

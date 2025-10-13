@@ -175,6 +175,59 @@ class ForgeLogService
     }
 
     /**
+     * Fetch nginx error logs from Laravel Forge
+     */
+    public function fetchNginxErrorLogs(): Response
+    {
+        $url = $this->buildNginxErrorLogUrl();
+
+        return Http::withToken($this->token ?? '')
+            ->acceptJson()
+            ->get($url);
+    }
+
+    /**
+     * Fetch and save nginx error logs
+     */
+    public function fetchAndSaveNginxErrorLogs(string $filePath): array
+    {
+        $response = $this->fetchNginxErrorLogs();
+
+        if ($response->failed()) {
+            return [
+                'success' => false,
+                'error' => 'Failed to fetch nginx error logs',
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ];
+        }
+
+        $content = $this->extractContent($response);
+
+        if (empty($content)) {
+            return [
+                'success' => false,
+                'error' => 'No nginx error log content available',
+            ];
+        }
+
+        $saved = $this->saveToFile($content, $filePath);
+
+        if (! $saved) {
+            return [
+                'success' => false,
+                'error' => 'Failed to write nginx error logs to file',
+            ];
+        }
+
+        return [
+            'success' => true,
+            'path' => $filePath,
+            'size' => strlen($content),
+        ];
+    }
+
+    /**
      * Build the Forge API URL for logs
      */
     private function buildLogUrl(string $logType): string
@@ -195,6 +248,19 @@ class ForgeLogService
     {
         return sprintf(
             'https://forge.laravel.com/api/orgs/%s/servers/%d/sites/%d/logs/nginx-access',
+            $this->organization ?? '',
+            $this->serverId ?? 0,
+            $this->siteId ?? 0
+        );
+    }
+
+    /**
+     * Build the Forge API URL for nginx error logs
+     */
+    private function buildNginxErrorLogUrl(): string
+    {
+        return sprintf(
+            'https://forge.laravel.com/api/orgs/%s/servers/%d/sites/%d/logs/nginx-error',
             $this->organization ?? '',
             $this->serverId ?? 0,
             $this->siteId ?? 0
