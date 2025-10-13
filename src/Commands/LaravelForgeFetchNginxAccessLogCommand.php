@@ -27,7 +27,7 @@ class LaravelForgeFetchNginxAccessLogCommand extends Command
 
         $this->info('Fetching nginx access logs from Laravel Forge...');
 
-        $logPath = storage_path('logs/nginx/access.log');
+        $logPath = storage_path(config('forge-logs.log_paths.nginx_access', 'logs/nginx/access.log'));
 
         $result = $service->fetchAndSaveNginxAccessLogs($logPath);
 

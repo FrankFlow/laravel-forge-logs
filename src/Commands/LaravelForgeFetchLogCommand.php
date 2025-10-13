@@ -27,7 +27,7 @@ class LaravelForgeFetchLogCommand extends Command
 
         $this->info('Fetching logs from Laravel Forge...');
 
-        $logPath = storage_path('logs/laravel.log');
+        $logPath = storage_path(config('forge-logs.log_paths.laravel', 'logs/laravel.log'));
 
         $result = $service->fetchAndSave($logPath);
 

@@ -27,7 +27,7 @@ class LaravelForgeFetchNginxErrorLogCommand extends Command
 
         $this->info('Fetching nginx error logs from Laravel Forge...');
 
-        $logPath = storage_path('logs/nginx/error.log');
+        $logPath = storage_path(config('forge-logs.log_paths.nginx_error', 'logs/nginx/error.log'));
 
         $result = $service->fetchAndSaveNginxErrorLogs($logPath);
 

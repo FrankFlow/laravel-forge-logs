@@ -20,6 +20,7 @@ With the use of AI, it is increasingly necessary to access logs remotely to spee
 - Fetch application logs directly from Laravel Forge
 - Fetch nginx access logs from Laravel Forge
 - Fetch nginx error logs from Laravel Forge
+- Customizable log file paths and filenames
 - Store logs locally for analysis
 - Simple artisan commands for easy integration 
 
@@ -99,7 +100,7 @@ This command will fetch Laravel application logs, Nginx access logs, and Nginx e
 php artisan forge-laravel-logs
 ```
 
-The logs will be saved to `storage/logs/laravel.log` by default.
+Saves to `storage/logs/laravel.log` (customizable in config).
 
 #### Nginx Access Logs
 
@@ -107,7 +108,7 @@ The logs will be saved to `storage/logs/laravel.log` by default.
 php artisan forge-nginx-access-logs
 ```
 
-The logs will be saved to `storage/logs/nginx/access.log` by default.
+Saves to `storage/logs/nginx/access.log` (customizable in config).
 
 #### Nginx Error Logs
 
@@ -115,7 +116,7 @@ The logs will be saved to `storage/logs/nginx/access.log` by default.
 php artisan forge-nginx-error-logs
 ```
 
-The logs will be saved to `storage/logs/nginx/error.log` by default.
+Saves to `storage/logs/nginx/error.log` (customizable in config).
 
 
 
@@ -136,8 +137,29 @@ return [
     'forge_server_id' => env('FORGE_SERVER_ID'),
     'forge_site_id' => env('FORGE_SITE_ID'),
     'forge_organization' => env('FORGE_ORGANIZATION'),
+
+    // Customize log file paths (relative to storage_path())
+    'log_paths' => [
+        'laravel' => 'logs/laravel.log',
+        'nginx_access' => 'logs/nginx/access.log',
+        'nginx_error' => 'logs/nginx/error.log',
+    ],
 ];
-``` 
+```
+
+### Customizing Log File Paths
+
+You can customize where the logs are saved by modifying the `log_paths` array in `config/forge-logs.php`:
+
+```php
+'log_paths' => [
+    'laravel' => 'logs/forge/laravel.log',           // Change path
+    'nginx_access' => 'logs/forge/nginx-access.log', // Change path and filename
+    'nginx_error' => 'logs/forge/nginx-error.log',   // Change path and filename
+],
+```
+
+All paths are relative to the `storage_path()` directory. 
 
 ## Testing
 
