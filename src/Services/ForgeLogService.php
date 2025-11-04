@@ -268,9 +268,9 @@ class ForgeLogService
     }
 
     /**
-     * Delete server logs via Forge API
+     * Delete site logs via Forge API
      */
-    public function deleteLogs(): array
+    public function deleteSiteLog(): array
     {
         if (empty($this->token) || empty($this->organization) || empty($this->serverId) || empty($this->siteId)) {
             return [
@@ -281,11 +281,105 @@ class ForgeLogService
 
         $apiService = new \FrankFlow\LaravelForgeLogs\Services\ForgeApiService($this->token);
 
-        return $apiService->deleteServerLog(
+        return $apiService->deleteSiteLog(
             $this->organization,
             $this->serverId,
             $this->siteId
         );
+    }
+
+    /**
+     * Delete nginx access logs via Forge API
+     */
+    public function deleteNginxAccessLog(): array
+    {
+        if (empty($this->token) || empty($this->organization) || empty($this->serverId) || empty($this->siteId)) {
+            return [
+                'success' => false,
+                'error' => 'Configuration incomplete. Run "php artisan forge-init" to configure.',
+            ];
+        }
+
+        $apiService = new \FrankFlow\LaravelForgeLogs\Services\ForgeApiService($this->token);
+
+        return $apiService->deleteNginxAccessLog(
+            $this->organization,
+            $this->serverId,
+            $this->siteId
+        );
+    }
+
+    /**
+     * Delete nginx error logs via Forge API
+     */
+    public function deleteNginxErrorLog(): array
+    {
+        if (empty($this->token) || empty($this->organization) || empty($this->serverId) || empty($this->siteId)) {
+            return [
+                'success' => false,
+                'error' => 'Configuration incomplete. Run "php artisan forge-init" to configure.',
+            ];
+        }
+
+        $apiService = new \FrankFlow\LaravelForgeLogs\Services\ForgeApiService($this->token);
+
+        return $apiService->deleteNginxErrorLog(
+            $this->organization,
+            $this->serverId,
+            $this->siteId
+        );
+    }
+
+    /**
+     * Delete all logs via Forge API
+     */
+    public function deleteAllLogs(): array
+    {
+        if (empty($this->token) || empty($this->organization) || empty($this->serverId) || empty($this->siteId)) {
+            return [
+                'success' => false,
+                'error' => 'Configuration incomplete. Run "php artisan forge-init" to configure.',
+            ];
+        }
+
+        $apiService = new \FrankFlow\LaravelForgeLogs\Services\ForgeApiService($this->token);
+
+        // Delete all three types of logs
+        $results = [];
+
+        $results['site'] = $apiService->deleteSiteLog(
+            $this->organization,
+            $this->serverId,
+            $this->siteId
+        );
+
+        $results['nginx_access'] = $apiService->deleteNginxAccessLog(
+            $this->organization,
+            $this->serverId,
+            $this->siteId
+        );
+
+        $results['nginx_error'] = $apiService->deleteNginxErrorLog(
+            $this->organization,
+            $this->serverId,
+            $this->siteId
+        );
+
+        // Check if all were successful
+        $allSuccessful = array_reduce($results, fn ($carry, $result) => $carry && $result['success'], true);
+
+        if (! $allSuccessful) {
+            return [
+                'success' => false,
+                'error' => 'Some logs failed to delete',
+                'results' => $results,
+            ];
+        }
+
+        return [
+            'success' => true,
+            'results' => $results,
+        ];
     }
 
     /**

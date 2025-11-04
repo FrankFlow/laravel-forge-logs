@@ -155,18 +155,64 @@ class ForgeApiService
     }
 
     /**
-     * Delete server log content
+     * Delete site/application log content
      *
      * @return array{success: bool, error?: string, status?: int, body?: string}
      */
-    public function deleteServerLog(string $orgSlug, int $serverId, int $siteId): array
+    public function deleteSiteLog(string $orgSlug, int $serverId, int $siteId): array
     {
-        $response = $this->makeRequest('DELETE', "/orgs/{$orgSlug}/servers/{$serverId}/sites/{$siteId}/logs");
+        $response = $this->makeRequest('DELETE', "/orgs/{$orgSlug}/servers/{$serverId}/sites/{$siteId}/logs/application");
 
         if ($response->failed()) {
             return [
                 'success' => false,
-                'error' => 'Failed to delete server logs',
+                'error' => 'Failed to delete site logs',
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ];
+        }
+
+        return [
+            'success' => true,
+        ];
+    }
+
+    /**
+     * Delete nginx access log content
+     *
+     * @return array{success: bool, error?: string, status?: int, body?: string}
+     */
+    public function deleteNginxAccessLog(string $orgSlug, int $serverId, int $siteId): array
+    {
+        $response = $this->makeRequest('DELETE', "/orgs/{$orgSlug}/servers/{$serverId}/sites/{$siteId}/logs/nginx-access");
+
+        if ($response->failed()) {
+            return [
+                'success' => false,
+                'error' => 'Failed to delete nginx access logs',
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ];
+        }
+
+        return [
+            'success' => true,
+        ];
+    }
+
+    /**
+     * Delete nginx error log content
+     *
+     * @return array{success: bool, error?: string, status?: int, body?: string}
+     */
+    public function deleteNginxErrorLog(string $orgSlug, int $serverId, int $siteId): array
+    {
+        $response = $this->makeRequest('DELETE', "/orgs/{$orgSlug}/servers/{$serverId}/sites/{$siteId}/logs/nginx-error");
+
+        if ($response->failed()) {
+            return [
+                'success' => false,
+                'error' => 'Failed to delete nginx error logs',
                 'status' => $response->status(),
                 'body' => $response->body(),
             ];
