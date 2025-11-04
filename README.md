@@ -126,13 +126,7 @@ php artisan forge-delete-logs
 
 Interactively deletes logs on the configured site via the Forge API. The command presents a menu to select which logs to delete:
 
-```
-Which logs would you like to delete?:
-  ◉ Site/Application Logs
-  ○ Nginx Access Logs
-  ○ Nginx Error Logs
-  ○ All Logs
-```
+![Forge Delete Step](./assets/laravel-forge-delete.png)
 
 **Options:**
 
