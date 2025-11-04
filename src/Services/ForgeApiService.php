@@ -155,6 +155,29 @@ class ForgeApiService
     }
 
     /**
+     * Delete server log content
+     *
+     * @return array{success: bool, error?: string, status?: int, body?: string}
+     */
+    public function deleteServerLog(string $orgSlug, int $serverId, int $siteId): array
+    {
+        $response = $this->makeRequest('DELETE', "/orgs/{$orgSlug}/servers/{$serverId}/sites/{$siteId}/logs");
+
+        if ($response->failed()) {
+            return [
+                'success' => false,
+                'error' => 'Failed to delete server logs',
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ];
+        }
+
+        return [
+            'success' => true,
+        ];
+    }
+
+    /**
      * Make HTTP request to Forge API
      */
     private function makeRequest(string $method, string $endpoint): Response

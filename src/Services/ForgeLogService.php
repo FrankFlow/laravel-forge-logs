@@ -268,6 +268,27 @@ class ForgeLogService
     }
 
     /**
+     * Delete server logs via Forge API
+     */
+    public function deleteLogs(): array
+    {
+        if (empty($this->token) || empty($this->organization) || empty($this->serverId) || empty($this->siteId)) {
+            return [
+                'success' => false,
+                'error' => 'Configuration incomplete. Run "php artisan forge-init" to configure.',
+            ];
+        }
+
+        $apiService = new \FrankFlow\LaravelForgeLogs\Services\ForgeApiService($this->token);
+
+        return $apiService->deleteServerLog(
+            $this->organization,
+            $this->serverId,
+            $this->siteId
+        );
+    }
+
+    /**
      * Validate configuration
      */
     public function validateConfig(): array

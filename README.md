@@ -118,6 +118,20 @@ php artisan forge-nginx-error-logs
 
 Saves to `storage/logs/nginx/error.log` (customizable in config).
 
+#### Delete Server Logs
+
+```bash
+php artisan forge-delete-logs
+```
+
+Deletes all logs on the configured server via the Forge API. A confirmation prompt will appear unless you use the `--force` flag:
+
+```bash
+php artisan forge-delete-logs --force
+```
+
+**⚠️ Warning**: This operation is permanent and deletes all server logs.
+
 
 
 
